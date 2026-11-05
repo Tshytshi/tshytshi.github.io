@@ -1,0 +1,79 @@
+/* Polices : dépose les fichiers dans un dossier "fonts/" (voir noms ci-dessous).
+   Sans les fichiers, le site retombe sur une police monospace. */
+@font-face{font-family:CC;src:url(fonts/CyberCity.otf)}
+@font-face{font-family:GG;src:url(fonts/GlitchGoblin.ttf)}
+@font-face{font-family:JLS;src:url(fonts/JLSDataGothicC_NC.otf)}
+:root{--g:#7eddff;--p:#a775fc;--v:#7388ff;--c:#00f0ff}
+*{box-sizing:border-box}
+body{margin:0;color:var(--g);font:16px/1.55 JLS,'Courier New',monospace;
+  background:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),url(image/fond.jpeg) center/cover fixed #000}
+#app{display:flex;flex-direction:column;min-height:100vh}
+
+#top{display:flex;gap:1rem;align-items:center;padding:.6rem 1rem;border-bottom:1px solid var(--v)}
+#ttl,h2{font-family:GG,JLS,monospace;font-weight:400;color:var(--p);animation:jit 4s infinite}
+#ttl{font-size:1.5rem}
+#ttl,.titre{font-family:CC,GG,monospace}
+#lay{flex:1;color:var(--c);font-size:.85rem}
+h2{font-size:1.8rem;margin:.3em 0}
+main{flex:1;width:100%;max-width:880px;margin:auto;padding:1rem}
+p{margin:.5em 0}
+.pk{color:var(--p)}.cy{color:var(--c)}
+
+button,input{font:inherit;background:#000;color:var(--c);border:1px solid var(--c);padding:.45rem .9rem;cursor:pointer}
+button:hover:not(:disabled){background:var(--c);color:#000}
+button:disabled{opacity:.4;cursor:not-allowed}
+input{cursor:text;color:var(--g);border-color:var(--g);outline:none}
+input:focus{box-shadow:0 0 10px var(--g)}
+.pr{display:flex;gap:.6rem;align-items:center;margin-top:.6rem}
+.pr input{flex:1;min-width:0}
+
+/* Inventaire / terminal toujours visible */
+#inv{position:sticky;bottom:0;background:#07000f;border-top:1px solid var(--g);padding:.5rem 1rem;font-size:.85rem;max-height:30vh;overflow:auto;z-index:5}
+#inv b{color:var(--v)}
+.it{display:inline-block;margin:.2rem .4rem .2rem 0;padding:.1rem .5rem;border:1px solid var(--v);color:var(--c)}
+
+/* Scanlines (actives uniquement une fois « dans » l'ordinateur) */
+body.scan::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.4) 0 1px,transparent 1px 3px);animation:fl .12s infinite}
+@keyframes fl{50%{opacity:.75}}
+
+/* Glitch */
+@keyframes jit{0%,92%,100%{transform:none;text-shadow:none}
+  93%{transform:translate(-3px,1px);text-shadow:3px 0 var(--c),-3px 0 var(--g)}
+  96%{transform:translate(3px,-1px) skewX(6deg);text-shadow:-3px 0 var(--c),3px 0 var(--g)}}
+.glitch main{animation:gx .35s steps(3) infinite}
+@keyframes gx{
+  0%{transform:none}
+  20%{transform:translate(-5px,2px) skewX(3deg);text-shadow:3px 0 var(--p),-3px 0 var(--c)}
+  40%{transform:translate(6px,-2px);filter:hue-rotate(90deg)}
+  60%{transform:translate(-2px,0) skewX(-4deg);text-shadow:-3px 0 var(--p),3px 0 var(--c)}
+  100%{transform:none}}
+
+/* Niveau 1 : terminal */
+#term{border:1px solid var(--g);padding:.8rem;height:42vh;overflow:auto;white-space:pre-wrap;word-break:break-word;background:#020a02}
+.hv{text-decoration:none;background:#1c0029;color:var(--v);border-bottom:1px dashed var(--p);cursor:help;padding:0 .25em}
+.hv.on{color:var(--c);background:none}
+.er{color:var(--p);cursor:pointer;text-decoration:underline wavy}
+.pop{position:fixed;top:28%;left:50%;transform:translateX(-50%);z-index:60;max-width:90vw;background:#0a0014;
+  border:2px solid var(--p);padding:1rem;box-shadow:0 0 28px var(--v);color:var(--c)}
+.pop pre{margin:0 0 .8rem;white-space:pre-wrap}
+
+/* Niveau 2 : mémoire */
+#bar{height:6px;background:#1a1a1a;margin:.9rem 0}
+#bar i{display:block;height:100%;width:0;background:var(--p)}
+.sym{font-size:2.2rem;width:4.6rem;height:4.6rem;margin:.3rem;padding:0;border-color:currentColor;background:#000}
+.sym:hover:not(:disabled){background:#14141f;color:inherit}
+.sym.lit{background:currentColor;-webkit-text-fill-color:#000;box-shadow:0 0 36px currentColor}
+
+/* Niveau 3 : l'IA */
+.k{color:var(--p);cursor:pointer;font-size:1.2em}
+.sw.on{background:var(--g);color:#000;border-color:var(--g)}
+#fw button{margin:.3rem .4rem .3rem 0}
+
+/* Faux message d'erreur navigateur */
+#err{position:fixed;top:1rem;right:1rem;z-index:70;background:#fff;color:#222;font:14px Arial,sans-serif;
+  padding:1rem;max-width:300px;border-radius:6px;box-shadow:0 4px 20px #000}
+
+@media(prefers-reduced-motion:reduce){#ttl,h2{animation:none}}
+#rst{border-color:var(--p);color:var(--p)}
+#rst:hover:not(:disabled){background:var(--p);color:#000}
